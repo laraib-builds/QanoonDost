@@ -52,9 +52,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityEnglish: 'Local Police Station (SHO) / Sessions Court',
     helpline: '15',
     isCognizable: true,
-    keywordsUrdu: ['ایف آئی آر', 'تھانہ', 'پولیس', 'رپورٹ', 'مقدمہ'],
-    keywordsRomanUrdu: ['fir', 'police', 'thana', 'sho', 'fir nahi kaat rahe', 'fir darj', 'report', 'police complaint', 'dar-khwast'],
-    keywordsEnglish: ['fir', 'police station', 'first information report', 'police complaint']
+    keywordsUrdu: ['ایف آئی آر', 'تھانہ', 'پولیس', 'رپورٹ', 'مقدمہ', 'اندراج', 'درج', 'چوری', 'ڈکیتی', 'لڑائی', 'ایس ایچ او', '154', 'ضابطہ فوجداری'],
+    keywordsRomanUrdu: ['fir', 'police', 'thana', 'sho', 'fir nahi kaat rahe', 'fir darj', 'daraj', 'report', 'police complaint', 'dar-khwast', 'chori', 'dacoity', 'larai', 'muqadma', '154', 'crpc 154', 'thany', 'moharar', 'case darj'],
+    keywordsEnglish: ['fir', 'police station', 'first information report', 'police complaint', 'crpc 154', 'criminal complaint', 'theft report', 'sho', 'cognizable']
   },
 
   // 2. JUSTICE OF PEACE 22-A (WHEN POLICE REFUSES FIR)
@@ -95,9 +95,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityUrdu: 'ڈسٹرکٹ اینڈ سیشن جج (کچہری)',
     authorityEnglish: 'District & Sessions Judge',
     helpline: '15',
-    keywordsUrdu: ['22 اے', 'بائیس اے', 'جسٹس آف پیس', 'سیشن جج'],
-    keywordsRomanUrdu: ['22a', '22 a', 'justice of peace', 'session judge', 'police inkar', 'sho ke khilaf'],
-    keywordsEnglish: ['22-a crpc', 'justice of peace', 'court order fir']
+    keywordsUrdu: ['22 اے', 'بائیس اے', 'جسٹس آف پیس', 'سیشن جج', 'پولیس انکار', 'ایف آئی آر نہیں کاٹ رہی', 'ایس ایچ او کے خلاف', 'عدالتی حکم'],
+    keywordsRomanUrdu: ['22a', '22 a', '22-a', 'justice of peace', 'session judge', 'sessions judge', 'police inkar', 'sho ke khilaf', 'fir nahi ho rahi', 'fir nahi kaat raha', 'fir darj nahi kar raha', 'police nahi sun rahi', 'adalti order fir', 'court order fir'],
+    keywordsEnglish: ['22-a crpc', '22a', 'justice of peace', 'court order fir', 'police refusal fir', 'sessions court fir', 'police harassment']
   },
 
   // 3. WIFE & CHILD MAINTENANCE (MFLO SEC 9)
@@ -137,9 +137,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityRomanUrdu: 'Family Court (Senior Civil Judge) / Union Council',
     authorityUrdu: 'فیملی کورٹ / یونین کونسل',
     authorityEnglish: 'Family Court / Union Council',
-    keywordsUrdu: ['خرچہ', 'نان نفقہ', 'بیوی کا خرچہ', 'بچوں کا خرچہ'],
-    keywordsRomanUrdu: ['kharcha', 'nan nafqa', 'biwi ka kharcha', 'bachon ka kharcha', 'shoher kharcha nahi deta', 'family court', 'monthly kharcha'],
-    keywordsEnglish: ['maintenance for wife', 'child support', 'family court maintenance']
+    keywordsUrdu: ['خرچہ', 'نان نفقہ', 'نان و نفقہ', 'بیوی کا خرچہ', 'بچوں کا خرچہ', 'شوہر خرچہ نہیں دیتا', 'فیملی کورٹ', 'ماہانہ خرچہ', 'سیکشن 9', 'عائلی قوانین'],
+    keywordsRomanUrdu: ['kharcha', 'kharch', 'kharche', 'kharchay', 'nan nafqa', 'nan o nafqa', 'nafqah', 'nafqa', 'biwi ka kharcha', 'bachon ka kharcha', 'bachay ka kharcha', 'shoher kharcha nahi deta', 'shohar kharcha', 'husband maintenance', 'family court', 'monthly kharcha', 'bachon ka kanooni kharcha', 'roti kapra', 'school fees', 'mflo section 9', 'section 9'],
+    keywordsEnglish: ['maintenance for wife', 'child support', 'family court maintenance', 'wife maintenance', 'child maintenance', 'mflo section 9', 'unpaid maintenance', 'interim maintenance']
   },
 
   // 4. KHULA & DOWRY (MFLO SEC 8)
@@ -179,9 +179,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityRomanUrdu: 'Family Court (Senior Civil Judge)',
     authorityUrdu: 'فیملی کورٹ',
     authorityEnglish: 'Family Court',
-    keywordsUrdu: ['خلع', 'طلاق', 'جہیز', 'علیحدگی'],
-    keywordsRomanUrdu: ['khula', 'khula ka tareeqa', 'talaq', 'separation', 'jahez wapsi', 'shoher tang karta hai', 'dawa khula'],
-    keywordsEnglish: ['khula', 'dissolution of marriage', 'divorce wife']
+    keywordsUrdu: ['خلع', 'طلاق', 'جہیز', 'علیحدگی', 'سامان جہیز', 'تنسیخ نکاح', 'حق خلع', 'شوہر چھوڑنا', 'جہیز کی واپسی'],
+    keywordsRomanUrdu: ['khula', 'khula ka tareeqa', 'talaq', 'talak', 'divorce', 'separation', 'jahez', 'jahez wapsi', 'jaheez', 'shoher tang karta hai', 'dawa khula', 'tanseekh nikah', 'dowry return', 'aurat talaq', 'shoher se alag'],
+    keywordsEnglish: ['khula', 'dissolution of marriage', 'divorce wife', 'talaq', 'dowry recovery', 'judicial divorce', 'family court khula']
   },
 
   // 5. CYBERCRIME & WHATSAPP BLACKMAILING (PECA 2016)
@@ -223,9 +223,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityEnglish: 'FIA Cyber Crime Wing',
     helpline: '1991',
     isCognizable: true,
-    keywordsUrdu: ['سائبر کرائم', 'واٹس ایپ بلیک میل', 'ہراسانی', 'پیکا'],
-    keywordsRomanUrdu: ['cyber crime', 'whatsapp blackmail', 'harassment', 'tasweer leak', 'video viral', 'blackmailing', 'fia helpline', 'online dhamki'],
-    keywordsEnglish: ['cybercrime', 'whatsapp blackmail', 'online harassment', 'fia 1991']
+    keywordsUrdu: ['سائبر کرائم', 'واٹس ایپ بلیک میل', 'بلیک میلنگ', 'بلیک میل', 'ہراسانی', 'ہراساں', 'پیکا', 'واٹس ایپ', 'تصویر وائرل', 'ویڈیو وائرل', 'دھمکی', 'ایف آئی اے', '1991', 'فیک اکاؤنٹ', 'آن لائن بلیک میل'],
+    keywordsRomanUrdu: ['cyber crime', 'cybercrime', 'whatsapp', 'watsapp', 'blackmail', 'blackmailing', 'blackmailer', 'harass', 'harassment', 'harassing', 'tasweer leak', 'tasveer', 'photo', 'video viral', 'fia', 'fia helpline', '1991', 'online dhamki', 'peca', 'peca 2016', 'section 24', 'fake account', 'id hack', 'harrasment', 'tang kar raha', 'dhamkian'],
+    keywordsEnglish: ['cybercrime', 'whatsapp blackmail', 'blackmail', 'blackmailing', 'online harassment', 'cyber stalking', 'fia 1991', 'peca 2016', 'section 24 peca', 'leaked photos', 'viral video threat', 'extortion']
   },
 
   // 6. TENANT & LANDLORD DISPUTE (RENT ACTS)
@@ -266,9 +266,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityUrdu: 'رینٹ کنٹرولر کورٹ',
     authorityEnglish: 'Rent Controller Court',
     helpline: '15',
-    keywordsUrdu: ['کرایہ دار', 'مکان مالک', 'خالی کروانا', 'بغیر نوٹس'],
-    keywordsRomanUrdu: ['kirayedar', 'makan malik', 'dukan khali', 'saman phenk dia', 'tala laga dia', 'rent agreement', 'bina notice nikal dia'],
-    keywordsEnglish: ['tenant eviction', 'landlord eviction', 'rent dispute']
+    keywordsUrdu: ['کرایہ دار', 'مکان مالک', 'خالی کروانا', 'بغیر نوٹس', 'رینٹ ایکٹ', 'بے دخل', 'سامان باہر', 'تالا لگانا', 'کرایہ نامہ', 'دکان خالی'],
+    keywordsRomanUrdu: ['kirayedar', 'kiraya', 'makan malik', 'malik makan', 'dukan khali', 'saman phenk dia', 'tala laga dia', 'rent agreement', 'bina notice nikal dia', 'ghar khali', 'eviction', 'rent dispute', 'rented premises', 'rent controller'],
+    keywordsEnglish: ['tenant eviction', 'landlord eviction', 'rent dispute', 'tenant rights', 'illegal eviction', 'rent agreement', 'rented premises act']
   },
 
   // 7. CHECK BOUNCE (PPC 489-F)
@@ -311,9 +311,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     isCognizable: true,
     isBailable: false,
     punishmentRomanUrdu: '3 saal qaid aur jurmana',
-    keywordsUrdu: ['چیک باؤنس', 'بوگس چیک', '489 ایف'],
-    keywordsRomanUrdu: ['cheque bounce', 'check bounce', '489f', '489 f', 'bank memo', 'bogus cheque', 'dishonor'],
-    keywordsEnglish: ['cheque bounce', 'dishonored cheque', '489-f ppc']
+    keywordsUrdu: ['چیک باؤنس', 'بوگس چیک', '489 ایف', 'چیک ڈس آنر', 'بینک میمو', 'چیک کی رقم', 'تعزیرات پاکستان 489'],
+    keywordsRomanUrdu: ['cheque bounce', 'check bounce', 'cheque', 'check', 'chek', 'bounce', 'bounced', '489f', '489 f', '489-f', 'bank memo', 'bogus cheque', 'dishonor', 'dishonour', 'dishonored', 'ppc 489', 'cheque wapis'],
+    keywordsEnglish: ['cheque bounce', 'check bounce', 'bounced check', 'dishonored cheque', '489-f ppc', 'dishonest cheque', 'bank return memo', 'cheque fraud']
   },
 
   // 8. FRAUD & SCAMS (PPC 420)
@@ -355,9 +355,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     isCognizable: true,
     isBailable: false,
     punishmentRomanUrdu: '7 saal tak qaid aur jurmana',
-    keywordsUrdu: ['فراڈ', 'دھوکہ', '420', 'چار سو بیس'],
-    keywordsRomanUrdu: ['fraud', 'dhoka', '420', 'char so bees', 'paise kha gaya', 'scam', 'fareeb'],
-    keywordsEnglish: ['fraud', 'cheating 420', 'financial scam']
+    keywordsUrdu: ['فراڈ', 'دھوکہ', 'دھوکہ دہی', '420', 'چار سو بیس', 'پیسے کھا گیا', 'مالی فراڈ', 'امانت میں خیانت', '406'],
+    keywordsRomanUrdu: ['fraud', 'dhoka', 'dhokha', '420', 'char so bees', 'paise kha gaya', 'scam', 'scammer', 'fareeb', 'fareb', 'ppc 420', 'financial fraud', 'amanat mein khayanat', '406', 'jhoot bol kar paise'],
+    keywordsEnglish: ['fraud', 'cheating 420', 'financial scam', 'section 420 ppc', 'criminal breach of trust', 'scammed', 'embezzlement']
   },
 
   // 9. NADRA INHERITANCE / SUCCESSION (ACT 2020)
@@ -397,9 +397,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityRomanUrdu: 'NADRA Succession Facilitation Center',
     authorityUrdu: 'نادرا سکسیشن سہولت سینٹر',
     authorityEnglish: 'NADRA Succession Center',
-    keywordsUrdu: ['وراثت', 'سکسیشن سرٹیفکیٹ', 'نادرا'],
-    keywordsRomanUrdu: ['wirasat', 'succession certificate', 'nadra succession', 'marhoom ke paise', 'heirship', 'bank account freeze'],
-    keywordsEnglish: ['succession certificate', 'nadra inheritance', 'letters of administration']
+    keywordsUrdu: ['وراثت', 'سکسیشن سرٹیفکیٹ', 'نادرا', 'جانشینی سرٹیفکیٹ', 'وارث', 'وارثان', 'مرحوم کے پیسے', 'بینک اکاؤنٹ فریز', 'ترکہ', 'جائیداد کی تقسیم'],
+    keywordsRomanUrdu: ['wirasat', 'warasat', 'wirasaat', 'succession certificate', 'succession', 'nadra succession', 'nadra', 'marhoom ke paise', 'heirship', 'heirs', 'waris', 'warisan', 'bank account freeze', 'tarka', 'jaidad hissa'],
+    keywordsEnglish: ['succession certificate', 'nadra inheritance', 'letters of administration', 'inheritance', 'legal heirs', 'succession act', 'deceased bank account', 'heirship certificate']
   },
 
   // 10. UNLAWFUL TERMINATION & GRATUITY (STANDING ORDERS 1968)
@@ -439,9 +439,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityRomanUrdu: 'Labour Court / Labour Directorate',
     authorityUrdu: 'لیبر کورٹ',
     authorityEnglish: 'Labour Court',
-    keywordsUrdu: ['نوکری سے نکال دیا', 'لیبر لا', 'گریجویٹی'],
-    keywordsRomanUrdu: ['naukri se nikal dia', 'job termination', 'gratuity', 'salary nahi di', 'labour court', 'firing notice'],
-    keywordsEnglish: ['unlawful termination', 'labour court', 'gratuity rights']
+    keywordsUrdu: ['نوکری سے نکال دیا', 'لیبر لا', 'گریجویٹی', 'ملازمت ختم', 'نوٹس کے بغیر برطرفی', 'لیبر کورٹ', 'تنخواہ روک لی', 'اسٹینڈنگ آرڈر'],
+    keywordsRomanUrdu: ['naukri se nikal dia', 'naukri', 'job termination', 'fired', 'firing', 'gratuity', 'salary nahi di', 'tankhwah', 'labour court', 'firing notice', 'bina notice nikal dia', 'mulazmat', 'standing order 12', 'unlawful termination'],
+    keywordsEnglish: ['unlawful termination', 'labour court', 'gratuity rights', 'job termination', 'wrongful termination', 'severance pay', 'standing order 12', 'labour law']
   },
 
   // 11. CONSUMER COURT (DEFECTIVE GOODS)
@@ -481,9 +481,9 @@ export const PAKISTAN_STATUTORY_DATABASE: LawEntry[] = [
     authorityRomanUrdu: 'District Consumer Court (Kachehri)',
     authorityUrdu: 'ڈسٹرکٹ کنزیومر کورٹ',
     authorityEnglish: 'District Consumer Court',
-    keywordsUrdu: ['خراب چیز', 'کنزیومر کورٹ', 'دکان دار پیسے نہیں دیتا'],
-    keywordsRomanUrdu: ['kharab cheez', 'consumer court', 'dukandar paise wapis nahi kar raha', 'warranty claim', 'faulty product', 'naqis samaan'],
-    keywordsEnglish: ['consumer court', 'defective product', 'refund refusal']
+    keywordsUrdu: ['خراب چیز', 'کنزیومر کورٹ', 'دکان دار پیسے نہیں دیتا', 'ناقص مال', 'وارنٹی کلیم', 'رقم واپسی نہیں', 'کنزیومر پروٹیکشن', 'ہرجانہ'],
+    keywordsRomanUrdu: ['kharab cheez', 'kharab', 'naqis', 'consumer court', 'consumer', 'dukandar paise wapis nahi kar raha', 'dukandar', 'warranty claim', 'faulty product', 'naqis samaan', 'defective goods', 'paise wapis', 'refund'],
+    keywordsEnglish: ['consumer court', 'defective product', 'refund refusal', 'consumer protection', 'faulty item', 'warranty refusal', 'consumer claim']
   }
 ];
 

@@ -1,10 +1,11 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Pause, Play } from 'lucide-react';
+import { Volume2, VolumeX, Pause, Play, Loader2, Sparkles } from 'lucide-react';
 
 interface AudioPlayerButtonProps {
   textToSpeak: string;
+  urduTextToSpeak?: string;
   language?: 'roman_urdu' | 'urdu' | 'english';
   label?: string;
   compact?: boolean;
@@ -12,13 +13,18 @@ interface AudioPlayerButtonProps {
 
 export default function AudioPlayerButton({
   textToSpeak,
+  urduTextToSpeak,
   language = 'roman_urdu',
-  label = 'Audio Suniye (Aawaz mein samjhein)',
+  label = 'Aawaz mein suniye (اردو آواز)',
   compact = false
 }: AudioPlayerButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [speechRate, setSpeechRate] = useState<number>(0.95);
+  const [isLoading, setIsLoading] = useState(false);
+  const [speechRate, setSpeechRate] = useState<number>(1.0);
+  const [audioSource, setAudioSource] = useState<'api' | 'synth'>('api');
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const synthRef = useRef<SpeechSynthesis | null>(null);
 
   useEffect(() => {
@@ -26,9 +32,7 @@ export default function AudioPlayerButton({
       synthRef.current = window.speechSynthesis;
     }
     return () => {
-      if (synthRef.current) {
-        synthRef.current.cancel();
-      }
+      stopAllAudio();
     };
   }, []);
 
@@ -40,34 +44,133 @@ export default function AudioPlayerButton({
       .trim();
   };
 
-  const startSpeaking = () => {
-    if (!synthRef.current) return;
+  const stopAllAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = '';
+      audioRef.current = null;
+    }
+    if (synthRef.current) {
+      synthRef.current.cancel();
+    }
+    setIsPlaying(false);
+    setIsPaused(false);
+    setIsLoading(false);
+  };
 
+  const startSpeaking = async () => {
+    // If paused, simply resume
     if (isPaused) {
-      synthRef.current.resume();
-      setIsPaused(false);
-      setIsPlaying(true);
+      if (audioRef.current && audioSource === 'api') {
+        audioRef.current.playbackRate = speechRate;
+        audioRef.current.play();
+        setIsPaused(false);
+        setIsPlaying(true);
+        return;
+      }
+      if (synthRef.current && audioSource === 'synth') {
+        synthRef.current.resume();
+        setIsPaused(false);
+        setIsPlaying(true);
+        return;
+      }
+    }
+
+    stopAllAudio();
+
+    // Determine target language and best text for natural pronunciation
+    // When in Urdu or Roman Urdu, we speak natural Urdu script so TTS engine pronounces native Urdu
+    const isEnglish = language === 'english';
+    const targetLang = isEnglish ? 'en' : 'ur';
+    const textForTts = isEnglish
+      ? cleanText(textToSpeak)
+      : cleanText(urduTextToSpeak || textToSpeak);
+
+    if (!textForTts) return;
+
+    setIsLoading(true);
+
+    try {
+      // 1. First choice: Use high-fidelity natural Urdu TTS API (Google Urdu stream)
+      const ttsUrl = `/api/tts?lang=${encodeURIComponent(targetLang)}&text=${encodeURIComponent(textForTts)}`;
+      const audio = new Audio(ttsUrl);
+      audio.playbackRate = speechRate;
+
+      audio.oncanplaythrough = () => {
+        setIsLoading(false);
+      };
+
+      audio.onplay = () => {
+        setIsPlaying(true);
+        setIsPaused(false);
+        setIsLoading(false);
+        setAudioSource('api');
+      };
+
+      audio.onended = () => {
+        setIsPlaying(false);
+        setIsPaused(false);
+        audioRef.current = null;
+      };
+
+      audio.onerror = () => {
+        console.warn('TTS API error, falling back to browser SpeechSynthesis');
+        playWithSpeechSynthesis(textForTts, targetLang);
+      };
+
+      audioRef.current = audio;
+      await audio.play();
+    } catch (err) {
+      console.warn('Audio playback error, fallback to SpeechSynthesis:', err);
+      playWithSpeechSynthesis(textForTts, targetLang);
+    }
+  };
+
+  const playWithSpeechSynthesis = (text: string, targetLang: string) => {
+    if (!synthRef.current) {
+      setIsLoading(false);
       return;
     }
 
     synthRef.current.cancel();
+    setAudioSource('synth');
 
-    const clean = cleanText(textToSpeak);
-    if (!clean) return;
-
-    const utterance = new SpeechSynthesisUtterance(clean);
-
-    // Pick best available voice
+    const utterance = new SpeechSynthesisUtterance(text);
     const voices = synthRef.current.getVoices();
-    if (language === 'urdu') {
-      utterance.lang = 'ur-PK';
-      const urduVoice = voices.find(v => v.lang.startsWith('ur') || v.name.toLowerCase().includes('urdu'));
-      if (urduVoice) utterance.voice = urduVoice;
+
+    if (targetLang === 'ur') {
+      // Look for pure Urdu voices first
+      const urduVoice = voices.find(
+        (v) =>
+          v.lang.startsWith('ur') ||
+          v.name.toLowerCase().includes('urdu') ||
+          v.name.toLowerCase().includes('pakistan')
+      );
+
+      // Hindi voices share identical spoken phonetics, dental consonants, and stress with Urdu
+      const hindiVoice = voices.find(
+        (v) => v.lang.startsWith('hi') || v.name.toLowerCase().includes('hindi')
+      );
+
+      // South Asian English voice as last phonetic resort
+      const indianVoice = voices.find((v) => v.lang.includes('IN'));
+
+      if (urduVoice) {
+        utterance.voice = urduVoice;
+        utterance.lang = urduVoice.lang;
+      } else if (hindiVoice) {
+        utterance.voice = hindiVoice;
+        utterance.lang = hindiVoice.lang;
+      } else if (indianVoice) {
+        utterance.voice = indianVoice;
+        utterance.lang = indianVoice.lang;
+      } else {
+        utterance.lang = 'ur-PK';
+      }
     } else {
-      // For Roman Urdu, English/Hindi voices read phonetic words very clearly
       utterance.lang = 'en-US';
-      const clearVoice = voices.find(v => v.lang.includes('IN') || v.lang.includes('US'));
-      if (clearVoice) utterance.voice = clearVoice;
+      const engVoice = voices.find((v) => v.lang.startsWith('en'));
+      if (engVoice) utterance.voice = engVoice;
     }
 
     utterance.rate = speechRate;
@@ -75,6 +178,7 @@ export default function AudioPlayerButton({
     utterance.onstart = () => {
       setIsPlaying(true);
       setIsPaused(false);
+      setIsLoading(false);
     };
 
     utterance.onend = () => {
@@ -85,35 +189,50 @@ export default function AudioPlayerButton({
     utterance.onerror = () => {
       setIsPlaying(false);
       setIsPaused(false);
+      setIsLoading(false);
     };
 
     synthRef.current.speak(utterance);
   };
 
   const pauseSpeaking = () => {
-    if (!synthRef.current) return;
-    synthRef.current.pause();
+    if (audioSource === 'api' && audioRef.current) {
+      audioRef.current.pause();
+    } else if (synthRef.current) {
+      synthRef.current.pause();
+    }
     setIsPaused(true);
     setIsPlaying(false);
   };
 
-  const stopSpeaking = () => {
-    if (!synthRef.current) return;
-    synthRef.current.cancel();
-    setIsPlaying(false);
-    setIsPaused(false);
+  const handleRateChange = (newRate: number) => {
+    setSpeechRate(newRate);
+    if (audioRef.current && audioSource === 'api') {
+      audioRef.current.playbackRate = newRate;
+    }
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-2 bg-gold-50 border border-gold-300/80 px-3 py-2 rounded-xl text-royal-950 shadow-xs">
+    <div className="flex flex-wrap items-center gap-2 bg-gradient-to-r from-gold-50 via-amber-50 to-gold-50 border border-gold-300 rounded-xl p-2.5 text-royal-950 shadow-xs">
       <div className="flex items-center gap-2">
         {!isPlaying ? (
           <button
             onClick={startSpeaking}
-            className="flex items-center gap-2 px-3 py-1.5 bg-royal-900 hover:bg-royal-800 text-white rounded-lg text-xs sm:text-sm font-bold shadow-sm transition-transform active:scale-95"
+            disabled={isLoading}
+            className="flex items-center gap-2 px-3 py-1.5 bg-royal-900 hover:bg-royal-800 text-white rounded-lg text-xs sm:text-sm font-bold shadow-sm transition-transform active:scale-95 disabled:opacity-75"
           >
-            <Volume2 className="w-4 h-4 text-gold-400 animate-pulse" />
-            <span>{isPaused ? 'Chalaayein (Resume)' : label}</span>
+            {isLoading ? (
+              <Loader2 className="w-4 h-4 text-gold-400 animate-spin" />
+            ) : (
+              <Volume2 className="w-4 h-4 text-gold-400 animate-pulse" />
+            )}
+            <span>
+              {isLoading
+                ? 'آواز لوڈ ہو رہی ہے...'
+                : isPaused
+                ? 'Chalaayein (Resume)'
+                : label}
+            </span>
           </button>
         ) : (
           <>
@@ -125,7 +244,7 @@ export default function AudioPlayerButton({
               <span>Rokein (Pause)</span>
             </button>
             <button
-              onClick={stopSpeaking}
+              onClick={stopAllAudio}
               className="flex items-center gap-1.5 px-2.5 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition-colors"
             >
               <VolumeX className="w-3.5 h-3.5" />
@@ -135,32 +254,36 @@ export default function AudioPlayerButton({
         )}
       </div>
 
-      <div className="flex items-center gap-1.5 text-xs text-royal-900 mr-auto">
-        <span className="font-medium text-slate-600">Speed:</span>
+      {/* Speed Controls */}
+      <div className="flex items-center gap-1 text-[11px] sm:text-xs text-royal-900 mr-auto">
+        <span className="font-semibold text-slate-600">Speed:</span>
         <button
-          onClick={() => setSpeechRate(0.85)}
-          className={`px-2 py-0.5 rounded text-xs transition-colors ${
-            speechRate < 0.9 ? 'bg-royal-900 text-white font-bold' : 'bg-white text-slate-700 border border-slate-200'
+          onClick={() => handleRateChange(0.85)}
+          className={`px-1.5 py-0.5 rounded transition-colors ${
+            speechRate < 0.95
+              ? 'bg-royal-900 text-white font-bold'
+              : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
           }`}
         >
           Slow
         </button>
         <button
-          onClick={() => setSpeechRate(1.0)}
-          className={`px-2 py-0.5 rounded text-xs transition-colors ${
-            speechRate >= 0.9 ? 'bg-royal-900 text-white font-bold' : 'bg-white text-slate-700 border border-slate-200'
+          onClick={() => handleRateChange(1.0)}
+          className={`px-1.5 py-0.5 rounded transition-colors ${
+            speechRate >= 0.95 && speechRate <= 1.05
+              ? 'bg-royal-900 text-white font-bold'
+              : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
           }`}
         >
           Normal
         </button>
       </div>
 
-      {isPlaying && (
-        <span className="text-xs text-emerald-700 font-bold animate-pulse flex items-center gap-1">
-          <span className="w-2 h-2 rounded-full bg-emerald-500" />
-          Aawaz chal rahi hai...
-        </span>
-      )}
+      {/* Live Audio Badge */}
+      <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-100/70 border border-emerald-300/60 px-2 py-0.5 rounded-full">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span>مستند اردو آواز</span>
+      </div>
     </div>
   );
 }

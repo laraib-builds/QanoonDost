@@ -44,9 +44,17 @@ Kahan Jayein: ${result.authoritiesToVisitRomanUrdu.join(', ')}`;
     setTimeout(() => setCopied(false), 2500);
   };
 
-  // Compile concise text for Audio
-  const speechText = result.found
-    ? `${result.laymanAnswerRomanUrdu}. Kanooni dhara: ${result.citations.map(c => `${c.actNameRomanUrdu} ${c.sectionOrArticle}`).join(' aur ')}. Agla qadam: ${result.practicalRoadmapRomanUrdu.join('. ')}. Kahan jayein: ${result.authoritiesToVisitRomanUrdu.join(', ')}.`
+  // Compile concise Urdu & English text for natural audio playback
+  const speechTextUrdu = result.found
+    ? `${result.laymanAnswerUrdu}۔ متعلقہ قانون: ${result.citations.map(c => `${c.actNameUrdu} ${c.sectionOrArticle}`).join(' اور ')}۔ اگلا قدم: ${result.practicalRoadmapUrdu.slice(0, 2).join('۔ ')}۔ کہاں جائیں: ${result.authoritiesToVisitUrdu[0] || 'متعلقہ ادارہ'}۔`
+    : `${result.laymanAnswerUrdu}۔ قانونی رہنمائی کے لیے بار کونسل کے مستند وکیل سے رجوع کریں۔`;
+
+  const speechTextEnglish = result.found
+    ? `${result.laymanAnswerEnglish}. Applicable law: ${result.citations.map(c => `${c.actNameEnglish} ${c.sectionOrArticle}`).join(' and ')}. Next steps: ${result.practicalRoadmapEnglish.slice(0, 2).join('. ')}. Authority: ${result.authoritiesToVisitEnglish[0] || 'Relevant Court'}.`
+    : `${result.laymanAnswerEnglish}. Please consult a licensed bar council lawyer.`;
+
+  const speechTextRoman = result.found
+    ? `${result.laymanAnswerRomanUrdu}. Kanooni dhara: ${result.citations.map(c => `${c.actNameRomanUrdu} ${c.sectionOrArticle}`).join(' aur ')}. Agla qadam: ${result.practicalRoadmapRomanUrdu.slice(0, 2).join('. ')}. Kahan jayein: ${result.authoritiesToVisitRomanUrdu[0] || 'Adalat ya Thana'}.`
     : `${result.laymanAnswerRomanUrdu}. Baraye meherbani Bar Council ke licensed wakeel se rabta karein.`;
 
   // IF UNVERIFIED / NO STATUTORY PROVISION FOUND
@@ -69,7 +77,12 @@ Kahan Jayein: ${result.authoritiesToVisitRomanUrdu.join(', ')}`;
 
         {/* Audio Player */}
         <div className="my-3">
-          <AudioPlayerButton textToSpeak={speechText} language={language} label="Aawaz mein suniye" />
+          <AudioPlayerButton
+            textToSpeak={isEnglish ? speechTextEnglish : speechTextRoman}
+            urduTextToSpeak={speechTextUrdu}
+            language={language}
+            label={isUrduScript ? 'اردو آواز میں سنیں' : isEnglish ? 'Listen in English' : 'Aawaz mein suniye (اردو آواز)'}
+          />
         </div>
 
         {/* Clear Notice */}
@@ -178,7 +191,12 @@ Kahan Jayein: ${result.authoritiesToVisitRomanUrdu.join(', ')}`;
         </div>
 
         {/* Audio Listen Bar */}
-        <AudioPlayerButton textToSpeak={speechText} language={language} label="Aawaz mein suniye" />
+        <AudioPlayerButton
+          textToSpeak={isEnglish ? speechTextEnglish : speechTextRoman}
+          urduTextToSpeak={speechTextUrdu}
+          language={language}
+          label={isUrduScript ? 'اردو آواز میں سنیں' : isEnglish ? 'Listen in English' : 'Aawaz mein suniye (اردو آواز)'}
+        />
 
         {/* CARD 1: Asaan Hal (Punchy 2 lines) */}
         <div className="bg-royal-50 border border-royal-100 rounded-xl p-3 sm:p-4 text-royal-950">
