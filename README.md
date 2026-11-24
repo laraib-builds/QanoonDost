@@ -1,6 +1,7 @@
 # قانون دوست | QanoonDost
 
 ### A citizen-focused Pakistani legal rights assistant
+🌐 Live Demo: https://qanoon-dost.vercel.app/
 
 **QanoonDost** is a civic-tech web application designed to make Pakistani laws easier to understand and navigate. It helps citizens explore their legal rights, find relevant statutory references, and understand possible steps to take when facing common legal issues.
 
