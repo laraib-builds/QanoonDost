@@ -1,6 +1,6 @@
 # قانون دوست | QanoonDost
 
-### A citizen-focused Pakistani legal rights assistant
+### A citizen-focused Pakistani legal rights assistant 
 
 **QanoonDost** is a civic-tech web application designed to make Pakistani laws easier to understand and navigate. It helps citizens explore their legal rights, find relevant statutory references, and understand possible steps to take when facing common legal issues.
 
@@ -291,5 +291,6 @@ For case-specific guidance, consult an enrolled advocate or an appropriate legal
 ---
 
 *Built with the intention of making legal information a little less intimidating and a little more accessible to the people who need it.*
-#   Q a n o o n D o s t  
+#   Q a n o o n D o s t 
+ 
  
