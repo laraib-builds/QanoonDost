@@ -153,7 +153,7 @@ These measures are intended to reduce risks, but they do not constitute a comple
 
 ## Project structure
 
-```text
+```text 
 QanoonDost/
 ├── src/
 │   ├── app/
