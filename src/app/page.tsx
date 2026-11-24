@@ -129,19 +129,19 @@ export default function Home() {
         onOpenGlossary={() => setIsGlossaryOpen(true)}
       />
 
-      <main className="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-8">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-2.5 sm:px-6 py-4 sm:py-8">
         {/* HERO SECTION - COMPACT, MODERN & FRIENDLY */}
-        <div className="relative rounded-3xl bg-gradient-to-br from-royal-950 via-royal-900 to-royal-800 text-white p-5 sm:p-10 shadow-xl border border-royal-700/60 overflow-hidden mb-6">
+        <div className="relative rounded-2xl sm:rounded-3xl bg-gradient-to-br from-royal-950 via-royal-900 to-royal-800 text-white p-4 sm:p-8 md:p-10 shadow-xl border border-royal-700/60 overflow-hidden mb-5 sm:mb-6">
           <div className="relative z-10 max-w-2xl mx-auto text-center">
             
             {/* National Legal Emblem Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-gold-400/30 text-gold-300 text-xs font-bold mb-3">
+            <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-white/10 border border-gold-400/30 text-gold-300 text-[10px] sm:text-xs font-bold mb-2.5 sm:mb-3">
               <Scale className="w-3.5 h-3.5 text-gold-400" />
               <span>Pakistani Qanoon & Dhara - 100% Verified</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-2xl sm:text-4xl font-black text-white mb-2 tracking-tight">
+            <h1 className="text-xl sm:text-3xl md:text-4xl font-black text-white mb-2 tracking-tight">
               {isUrduScript ? (
                 'اپنا قانونی مسئلہ بیان کریں یا بولیں'
               ) : (
@@ -152,14 +152,14 @@ export default function Home() {
             </h1>
 
             {/* Concise Subtitle */}
-            <p className="text-xs sm:text-sm text-slate-200 mb-6 font-normal">
+            <p className="text-xs sm:text-sm text-slate-200 mb-4 sm:mb-6 font-normal">
               {isUrduScript
                 ? 'عام فہم زبان اور مستند قانونی دفعات کے ساتھ فوری حل جانئے۔'
                 : 'Pakistani kanoon ab har aam shehri ki samajh mein. Mic par bolein ya likhein:'}
             </p>
 
             {/* SEARCH & VOICE INPUT BAR */}
-            <div className="bg-white rounded-2xl p-2 shadow-2xl border-2 border-gold-400 flex items-center gap-2 text-royal-950">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-1.5 sm:p-2 shadow-2xl border-2 border-gold-400 flex items-center gap-1.5 sm:gap-2 text-royal-950 w-full">
               {/* Voice Input Button */}
               <div className="flex-shrink-0">
                 <VoiceInputButton
@@ -180,35 +180,35 @@ export default function Home() {
                 placeholder={
                   isUrduScript
                     ? 'اپنا سوال لکھیں یا مائیک دبائیں...'
-                    : 'Masla likhein ya mic dabayein (jaise: police fir nahi kaat rahi)...'
+                    : 'Masla likhein ya mic dabayein...'
                 }
-                className="w-full py-2.5 px-2 text-sm sm:text-base bg-transparent focus:outline-none text-royal-950 placeholder:text-slate-400 font-medium"
+                className="min-w-0 flex-1 py-2 sm:py-2.5 px-1.5 sm:px-2 text-xs sm:text-base bg-transparent focus:outline-none text-royal-950 placeholder:text-slate-400 font-medium"
               />
 
               {/* Search Button */}
               <button
                 onClick={() => handleSearch()}
                 disabled={isLoading}
-                className="flex-shrink-0 flex items-center gap-1 px-4 sm:px-5 py-2.5 bg-royal-900 hover:bg-royal-800 text-white font-bold rounded-xl text-xs sm:text-sm transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                className="flex-shrink-0 flex items-center gap-1 px-3 sm:px-5 py-2 sm:py-2.5 bg-royal-900 hover:bg-royal-800 text-white font-bold rounded-lg sm:rounded-xl text-xs sm:text-sm transition-all shadow-sm active:scale-95 disabled:opacity-50"
               >
                 {isLoading ? (
                   <span className="w-4 h-4 border-2 border-gold-400 border-t-transparent rounded-full animate-spin" />
                 ) : (
                   <Search className="w-4 h-4 text-gold-400" />
                 )}
-                <span>Search</span>
+                <span className="hidden xs:inline">Search</span>
               </button>
             </div>
 
             {/* Voice hint */}
-            <div className="flex items-center justify-center gap-1.5 mt-2.5 text-[11px] text-gold-300">
-              <Mic className="w-3 h-3 text-gold-400 animate-pulse" />
+            <div className="flex items-center justify-center gap-1.5 mt-2 text-[10px] sm:text-[11px] text-gold-300 text-center px-1">
+              <Mic className="w-3 h-3 text-gold-400 animate-pulse flex-shrink-0" />
               <span>Peela mic daba kar Roman Urdu ya Urdu mein bol kar sawal poochein</span>
             </div>
 
             {/* 1-Tap Quick Question Chips */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 mt-4">
-              <span className="text-[11px] text-slate-300 font-medium mr-1">Sample sawalat:</span>
+            <div className="flex flex-wrap items-center justify-center gap-1.5 mt-3 sm:mt-4">
+              <span className="text-[10px] sm:text-[11px] text-slate-300 font-medium mr-1">Sample sawalat:</span>
               {sampleQuickChips.slice(0, 4).map((chip, idx) => (
                 <button
                   key={idx}
@@ -216,7 +216,7 @@ export default function Home() {
                     setInputQuery(chip.text);
                     handleSearch(chip.text);
                   }}
-                  className="px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[11px] text-slate-200 hover:text-white transition-all"
+                  className="px-2 sm:px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-[10px] sm:text-[11px] text-slate-200 hover:text-white transition-all"
                 >
                   {chip.label}
                 </button>
@@ -228,9 +228,9 @@ export default function Home() {
 
         {/* RECENT SEARCHES */}
         {recentQueries.length > 0 && !currentResult && (
-          <div className="bg-white border border-slate-200 rounded-xl p-2.5 mb-4 shadow-xs flex items-center justify-between text-xs">
-            <div className="flex items-center gap-1.5 overflow-x-auto py-0.5">
-              <span className="font-bold text-slate-500 flex items-center gap-1 flex-shrink-0">
+          <div className="bg-white border border-slate-200 rounded-xl p-2 sm:p-2.5 mb-4 shadow-xs flex items-center justify-between text-xs gap-1.5 overflow-hidden w-full">
+            <div className="flex items-center gap-1.5 overflow-x-auto py-0.5 min-w-0 flex-1 scrollbar-none">
+              <span className="font-bold text-slate-500 flex items-center gap-1 flex-shrink-0 text-[11px] sm:text-xs">
                 <History className="w-3.5 h-3.5 text-royal-700" />
                 Haaliyah:
               </span>
@@ -241,7 +241,8 @@ export default function Home() {
                     setInputQuery(q);
                     handleSearch(q);
                   }}
-                  className="px-2 py-0.5 bg-slate-100 hover:bg-gold-50 hover:text-royal-900 border border-slate-200 rounded-lg text-slate-700 whitespace-nowrap"
+                  className="px-2 py-0.5 bg-slate-100 hover:bg-gold-50 hover:text-royal-900 border border-slate-200 rounded-lg text-slate-700 whitespace-nowrap text-[11px] sm:text-xs flex-shrink-0 max-w-[180px] sm:max-w-xs truncate"
+                  title={q}
                 >
                   {q}
                 </button>
@@ -250,7 +251,7 @@ export default function Home() {
             <button
               onClick={clearHistory}
               title="Clear history"
-              className="p-1 text-slate-400 hover:text-red-600 transition-colors"
+              className="p-1 text-slate-400 hover:text-red-600 transition-colors flex-shrink-0"
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -336,7 +337,7 @@ export default function Home() {
             <div className="w-7 h-7 rounded-lg bg-gold-500 text-royal-950 flex items-center justify-center font-bold">
               <Scale className="w-4 h-4" />
             </div>
-            <span className="font-bold text-sm">قانون دوست (QanoonDost)</span>
+            <span className="font-bold text-sm font-urdu">قانون دوست</span>
             <span className="text-slate-400 text-[11px]">• Pakistan Public Legal Literacy</span>
           </div>
 

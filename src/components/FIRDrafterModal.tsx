@@ -103,24 +103,24 @@ export default function FIRDrafterModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-royal-950/75 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col border border-royal-200 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-royal-950/75 backdrop-blur-sm animate-fade-in">
+      <div className="bg-white w-full max-w-4xl max-h-[92vh] rounded-xl sm:rounded-2xl shadow-2xl flex flex-col border border-royal-200 overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-royal-950 via-royal-900 to-royal-800 text-white p-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-gold-400" />
-            <div>
-              <h3 className="text-base sm:text-lg font-bold">
+        <div className="bg-gradient-to-r from-royal-950 via-royal-900 to-royal-800 text-white p-3 sm:p-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <FileText className="w-4 h-4 sm:w-5 sm:h-5 text-gold-400 flex-shrink-0" />
+            <div className="min-w-0">
+              <h3 className="text-sm sm:text-lg font-bold truncate">
                 Kanooni Dar-khwast / FIR Drafter
               </h3>
-              <p className="text-xs text-slate-300">
+              <p className="text-[10px] sm:text-xs text-slate-300 truncate">
                 Apni details likhein aur tayyar qanooni application print karein
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-slate-300 hover:text-white rounded-lg"
+            className="p-1 sm:p-1.5 text-slate-300 hover:text-white rounded-lg flex-shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -247,7 +247,7 @@ export default function FIRDrafterModal({
 
           {/* Printable Preview Column */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
               <span className="text-xs font-bold text-royal-950 uppercase tracking-wider">
                 Print ke liye Tayyar Draft:
               </span>

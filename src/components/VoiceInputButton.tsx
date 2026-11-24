@@ -219,8 +219,8 @@ export default function VoiceInputButton({
 
       {/* Interactive Voice Assistant Modal */}
       {showVoiceModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-royal-950/75 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl border-2 border-gold-400 overflow-hidden text-center p-6 flex flex-col items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-royal-950/75 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white w-full max-w-md rounded-xl sm:rounded-2xl shadow-2xl border-2 border-gold-400 overflow-hidden text-center p-4 sm:p-6 flex flex-col items-center">
             
             {/* Top Close */}
             <div className="w-full flex justify-between items-center mb-4">
